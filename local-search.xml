@@ -4,6 +4,83 @@
   
   
   <entry>
+    <title>验证回文字符串 Ⅱ</title>
+    <link href="/2020/06/28/valid-palindrome-ii/"/>
+    <url>/2020/06/28/valid-palindrome-ii/</url>
+    
+    <content type="html"><![CDATA[<p><strong>题目描述：</strong><br>给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。</p><p><strong>示例：</strong><br>输入: “aba”<br>输出: True</p><p>输入: “abca”<br>输出: True<br>解释: 你可以删除c字符。</p><p><strong>解题思路：</strong><br>使用双指针可以很容易判断一个字符串是否是回文字符串：令一个指针从左到右遍历，一个指针从右到左遍历，这两个指针同时移动一个位置，每次都判断两个指针指向的字符是否相同，如果都相同，字符串才是具有左右对称性质的回文字符串。<br>                                     <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg890ifl4qg309v08rglm.gif" srcset="/img/loading.gif" alt=""><br>本题的关键是处理删除一个字符。在使用双指针遍历字符串时，如果出现两个指针指向的字符不相等的情况，我们就试着删除一个字符，再判断删除完之后的字符串是否是回文字符串。<br>在判断是否为回文字符串时，我们不需要判断整个字符串，因为左指针左边和右指针右边的字符之前已经判断过具有对称性质，所以只需要判断中间的子字符串即可。<br>在试着删除字符时，我们既可以删除左指针指向的字符，也可以删除右指针指向的字符。<br>                                <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg890hr41tg30ce08dt8y.gif" srcset="/img/loading.gif" alt=""></p><pre><code class="hljs Java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">validPalindrome</span><span class="hljs-params">(String s)</span> </span>&#123;        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = s.length() - <span class="hljs-number">1</span>; i &lt; j; i++, j--) &#123;            <span class="hljs-keyword">if</span>(s.charAt(i) != s.charAt(j)) &#123;                <span class="hljs-keyword">return</span> isPalindrome(s, i + <span class="hljs-number">1</span>, j) || isPalindrome(s, i, j - <span class="hljs-number">1</span>);            &#125;        &#125;        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;    &#125;    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(String s, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span> </span>&#123;        <span class="hljs-keyword">while</span>(i &lt; j) &#123;            <span class="hljs-keyword">if</span>(s.charAt(i++) != s.charAt(j--)) &#123;                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;            &#125;        &#125;        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>字符串</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>反转字符串中的元音字母</title>
+    <link href="/2020/06/28/reverse-vowels-of-a-string/"/>
+    <url>/2020/06/28/reverse-vowels-of-a-string/</url>
+    
+    <content type="html"><![CDATA[<p><strong>题目描述：</strong><br>编写一个函数，以字符串作为输入，反转该字符串中的元音字母。</p><p><strong>示例：</strong><br>输入: “hello”<br>输出: “holle”</p><p>输入: “leetcode”<br>输出: “leotcede”</p><p><strong>解题思路：</strong><br>使用双指针，一个指针从头向尾遍历，一个指针从尾到头遍历，当两个指针都遍历到元音字符时，交换这两个元音字符。<br>为了快速判断一个字符是不是元音字符，我们将全部元音字符添加到集合 HashSet 中，从而以 O(1) 的时间复杂度进行该操作。</p><ul><li>时间复杂度为 O(N)：只需要遍历所有元素一次</li><li>空间复杂度 O(1)：只需要使用两个额外变量</li></ul><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg88we5abcg30jc0btaan.gif" srcset="/img/loading.gif" alt=""></p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> HashSet&lt;Character&gt; vowels =  <span class="hljs-keyword">new</span> HashSet&lt;&gt;(        Arrays.asList(<span class="hljs-string">'a'</span>, <span class="hljs-string">'e'</span>, <span class="hljs-string">'i'</span>, <span class="hljs-string">'o'</span>, <span class="hljs-string">'u'</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'E'</span>, <span class="hljs-string">'I'</span>, <span class="hljs-string">'O'</span>, <span class="hljs-string">'U'</span>));    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">reverseVowels</span><span class="hljs-params">(String s)</span> </span>&#123;        <span class="hljs-keyword">if</span>(s == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = s.length() - <span class="hljs-number">1</span>;        <span class="hljs-keyword">char</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[s.length()];        <span class="hljs-keyword">while</span>(i &lt;= j) &#123;            <span class="hljs-keyword">char</span> ci = s.charAt(i);            <span class="hljs-keyword">char</span> cj = s.charAt(j);            <span class="hljs-keyword">if</span>(!vowels.contains(ci)) &#123;                result[i++] = ci;            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!vowels.contains(cj)) &#123;                result[j--] = cj;            &#125;<span class="hljs-keyword">else</span> &#123;                result[i++] = cj;                result[j--] = ci;            &#125;        &#125;        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> String(result);    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>字符串</tag>
+      
+      <tag>双指针</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>平方数之和</title>
+    <link href="/2020/06/28/sum-of-square-numbers/"/>
+    <url>/2020/06/28/sum-of-square-numbers/</url>
+    
+    <content type="html"><![CDATA[<p><strong>题目描述：</strong><br>给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c。</p><p><strong>示例：</strong></p><pre><code class="hljs yaml"><span class="hljs-string">输入:</span> <span class="hljs-number">5</span><span class="hljs-string">输出:</span> <span class="hljs-literal">True</span><span class="hljs-string">解释:</span> <span class="hljs-number">1</span> <span class="hljs-string">*</span> <span class="hljs-number">1</span> <span class="hljs-string">+</span> <span class="hljs-number">2</span> <span class="hljs-string">*</span> <span class="hljs-number">2</span> <span class="hljs-string">=</span> <span class="hljs-number">5</span></code></pre><pre><code class="hljs yaml"><span class="hljs-string">输入:</span> <span class="hljs-number">3</span><span class="hljs-string">输出:</span> <span class="hljs-literal">False</span></code></pre><p><strong>解题思路：</strong><br>可以看成是在元素为 0<del>target 的有序数组中查找两个数，使得这两个数的平方和为 target，如果能找到，则返回 true，表示 target 是两个整数的平方和。<br>本题和 167. Two Sum II - Input array is sorted 类似，只有一个明显区别：一个是和为 target，一个是平方和为 target。本题同样可以使用双指针得到两个数，使其平方和为 target。<br>本题的关键是右指针的初始化，实现剪枝，从而降低时间复杂度。设右指针为 x，左指针固定为 0，为了使 02 + x2 的值尽可能接近 target，我们可以将 x 取为 sqrt(target)。<br>因为最多只需要遍历一次 0</del>sqrt(target)，所以时间复杂度为 O(sqrt(target))。又因为只使用了两个额外的变量，因此空间复杂度为 O(1)。</p><pre><code class="hljs Java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">judgeSquareSum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target)</span> </span>&#123;        <span class="hljs-keyword">if</span>(target &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = (<span class="hljs-keyword">int</span>)Math.sqrt(target);        <span class="hljs-keyword">while</span>(i &lt;= j) &#123;            <span class="hljs-keyword">int</span> sum = i * i + j * j;            <span class="hljs-keyword">if</span>(sum == target) &#123;                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sum &gt; target) &#123;                j--;            &#125;<span class="hljs-keyword">else</span> &#123;                i++;            &#125;        &#125;        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数学</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>两数之和</title>
     <link href="/2020/06/28/twosum/"/>
     <url>/2020/06/28/twosum/</url>
