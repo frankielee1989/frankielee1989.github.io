@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>回文数</title>
+    <link href="/2020/06/28/palindrome-number/"/>
+    <url>/2020/06/28/palindrome-number/</url>
+    
+    <content type="html"><![CDATA[<p><strong>题目描述：</strong></p><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p><p><strong>示例：</strong></p><pre><code class="hljs yaml"><span class="hljs-string">输入:</span> <span class="hljs-number">121</span><span class="hljs-string">输出:</span> <span class="hljs-literal">true</span><span class="hljs-string">输入:</span> <span class="hljs-number">-121</span><span class="hljs-string">输出:</span> <span class="hljs-literal">false</span><span class="hljs-string">解释:</span> <span class="hljs-string">从左向右读,</span> <span class="hljs-string">为</span> <span class="hljs-number">-121</span> <span class="hljs-string">。</span> <span class="hljs-string">从右向左读,</span> <span class="hljs-string">为</span> <span class="hljs-number">121</span><span class="hljs-bullet">-</span> <span class="hljs-string">。因此它不是一个回文数。</span><span class="hljs-string">输入:</span> <span class="hljs-number">10</span><span class="hljs-string">输出:</span> <span class="hljs-literal">false</span><span class="hljs-string">解释:</span> <span class="hljs-string">从右向左读,</span> <span class="hljs-string">为</span> <span class="hljs-number">01</span> <span class="hljs-string">。因此它不是一个回文数。</span></code></pre><p><strong>进阶：</strong></p><p>你能不将整数转为字符串来解决这个问题吗？</p><p><strong>解题思路：</strong></p><p>直观上来看待回文数的话，就感觉像是将数字进行对折后看能否一一对应。</p><p>所以这个解法的操作就是 <strong>取出后半段数字进行翻转</strong>。</p><p>这里需要注意的一个点就是由于回文数的位数可奇可偶，所以当它的长度是偶数时，它对折过来应该是相等的；当它的长度是奇数时，那么它对折过来后，有一个的长度需要去掉一位数（除以 10 并取整）。</p><p>具体做法如下：</p><ul><li>每次进行取余操作 （ %10），取出最低的数字：<code>y = x % 10</code></li><li>将最低的数字加到取出数的末尾：<code>revertNum = revertNum * 10 + y</code></li><li>每取一个最低位数字，x 都要自除以 10</li><li>判断 <code>x</code> 是不是小于 <code>revertNum</code> ，当它小于的时候，说明数字已经对半或者过半了</li><li>最后，判断奇偶数情况：如果是偶数的话，revertNum 和 x 相等；如果是奇数的话，最中间的数字就在revertNum 的最低位上，将它除以 10 以后应该和 x 相等。</li></ul><p><img src="https://pic.leetcode-cn.com/6777f38a8c8c443fde069cd4ffcbe39fc2828ff39ca3440fb01f15034e0271b8-file_1558924390353" srcset="/img/loading.gif" alt="img"></p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;        <span class="hljs-comment">//思考：这里大家可以思考一下，为什么末尾为 0 就可以直接返回 false</span>        <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span> || (x % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> &amp;&amp; x != <span class="hljs-number">0</span>)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;        <span class="hljs-keyword">int</span> revertedNumber = <span class="hljs-number">0</span>;        <span class="hljs-keyword">while</span> (x &gt; revertedNumber) &#123;            revertedNumber = revertedNumber * <span class="hljs-number">10</span> + x % <span class="hljs-number">10</span>;            x /= <span class="hljs-number">10</span>;        &#125;        <span class="hljs-keyword">return</span> x == revertedNumber || x == revertedNumber / <span class="hljs-number">10</span>;    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数学</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>整数反转</title>
+    <link href="/2020/06/28/reverse-integer/"/>
+    <url>/2020/06/28/reverse-integer/</url>
+    
+    <content type="html"><![CDATA[<p><strong>题目描述：</strong></p><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p><p><strong>示例：</strong></p><pre><code class="hljs angelscript">输入: <span class="hljs-number">123</span>输出: <span class="hljs-number">321</span>输入: <span class="hljs-number">-123</span>输出: <span class="hljs-number">-321</span>输入: <span class="hljs-number">120</span>输出: <span class="hljs-number">21</span></code></pre><p><strong>注意：</strong></p><p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [-2147483647, 2147483647]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p><p><strong>解题思路：</strong></p><p>依次取出当前数字的最后一位数，累加。<br>关键在于如何判断整数溢出：将每次操作后的数字用临时变量存储，对该变量“反操作”，若与操作前的结果不等，则发生溢出，直接返回0</p><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">reverse</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span> ;        <span class="hljs-keyword">while</span>(x != <span class="hljs-number">0</span>)&#123;            <span class="hljs-keyword">int</span> temp = x % <span class="hljs-number">10</span> + res * <span class="hljs-number">10</span>;            <span class="hljs-keyword">if</span>((temp - x % <span class="hljs-number">10</span>) / <span class="hljs-number">10</span> != res)&#123; <span class="hljs-comment">//最关键的一步</span>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span> ;            &#125;            res = temp ;            x /= <span class="hljs-number">10</span> ;        &#125;        <span class="hljs-keyword">return</span> res ;    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数学</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>验证回文字符串 Ⅱ</title>
     <link href="/2020/06/28/valid-palindrome-ii/"/>
     <url>/2020/06/28/valid-palindrome-ii/</url>
