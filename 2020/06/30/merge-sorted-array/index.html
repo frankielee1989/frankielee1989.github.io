@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>隐秘的角落让我印象深刻的镜头 - Frankie&#39;s Blog</title>
+  <title>合并两个有序数组 - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-29 19:45">
-      2020年6月29日 晚上
+    <time datetime="2020-06-30 15:38">
+      2020年6月30日 下午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      73 字
+      401 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      5
        分钟
     </span>
   
@@ -204,18 +204,47 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg9g4gei65j31hc0u014d.jpg" srcset="/img/loading.gif" alt="p2611236839"></p>
-<p>最明亮清新的画面，最暗潮汹涌的同框。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg9eg5ca8oj31hc0u0npf.jpg" srcset="/img/loading.gif" alt="p2609494086.jpg"></p>
-<p>这是全剧唯一一个能让人看到他们身上依然保有童真的镜头。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg9g5o71b4j311y0lbn6d.jpg" srcset="/img/loading.gif" alt="p2609823056.jpg"></p>
-<p>甜腻又恶心。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg9g62u474j31hc0swtjg.jpg" srcset="/img/loading.gif" alt="p2610642764"></p>
-<p>另一种授课，黑化的开始。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg9g7hjoqzj31hc0sw77f.jpg" srcset="/img/loading.gif" alt="p2611410903"></p>
-<p>以爱之名行恶，最终失去所爱。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg9g805k66j31hc0swn4z.jpg" srcset="/img/loading.gif" alt="p2611413427"></p>
-<p>朝阳，东升。</p>
+              <p><strong>题目描述：</strong></p>
+<p>给你两个有序整数数组 <em>nums1</em> 和 <em>nums2*，请你将 *nums2</em> 合并到 <em>nums1</em> 中<em>，</em>使 <em>nums1</em> 成为一个有序数组。</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>初始化 <em>nums1</em> 和 <em>nums2</em> 的元素数量分别为 <em>m</em> 和 <em>n</em>。</li>
+<li>你可以假设 <em>nums1</em> 有足够的空间（空间大小大于或等于 <em>m + n*）来保存 *nums2</em> 中的元素。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="hljs angelscript">输入:
+nums1 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], m = <span class="hljs-number">3</span>
+nums2 = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],       n = <span class="hljs-number">3</span>
+
+输出: [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]</code></pre>
+
+<p><strong>解题思路：</strong></p>
+<ul>
+<li>标签：从后向前数组遍历</li>
+<li>因为 <code>nums1</code> 的空间都集中在后面，所以从后向前处理排序的数据会更好，节省空间，一边遍历一边将值填充进去</li>
+<li>设置指针 len1 和 len2 分别指向 nums1 和 nums2 的有数字尾部，从尾部值开始比较遍历，同时设置指针 len 指向 nums1 的最末尾，每次遍历比较值大小之后，则进行填充</li>
+<li>当 <code>len1&lt;0</code> 时遍历结束，此时 <code>nums2</code> 中还有数据未拷贝完全，将其直接拷贝到 <code>nums1</code> 的前面，最后得到结果数组</li>
+<li>时间复杂度：O(m+n)</li>
+</ul>
+<p><strong>图解：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae3qeas6j30zk0ivt9j.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae4017rlj30zk0ivdgn.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae496f97j30zk0ivmxy.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae4h2iy0j30zk0ivmy0.jpg" srcset="/img/loading.gif" alt="img"></p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums1, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span>[] nums2, <span class="hljs-keyword">int</span> n)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> len1 = m - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> len2 = n - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> len = m + n - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span>(len1 &gt;= <span class="hljs-number">0</span> &amp;&amp; len2 &gt;= <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-comment">// 注意--符号在后面，表示先进行计算再减1，这种缩写缩短了代码</span>
+            nums1[len--] = nums1[len1] &gt; nums2[len2] ? nums1[len1--] : nums2[len2--];
+        &#125;
+        <span class="hljs-comment">// 表示将nums2数组从下标0位置开始，拷贝到nums1数组中，从下标0位置开始，长度为len2+1</span>
+        System.arraycopy(nums2, <span class="hljs-number">0</span>, nums1, <span class="hljs-number">0</span>, len2 + <span class="hljs-number">1</span>);
+    &#125;
+&#125;</code></pre>
+
 
             </article>
             <hr>
@@ -225,7 +254,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/movies/">movies</a>
+                      <a class="hover-with-bg" href="/categories/LeetCode/">LeetCode</a>
                     
                   </div>
                 
@@ -233,11 +262,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9B%BD%E4%BA%A7%E5%89%A7/">国产剧</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%A5%BD%E5%89%A7/">好剧</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%9A%90%E7%A7%98%E7%9A%84%E8%A7%92%E8%90%BD/">隐秘的角落</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
                   </div>
                 
@@ -250,18 +277,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/30/merge-sorted-array/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">合并两个有序数组</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/29/SparseArray/">
-                        <span class="hidden-mobile">稀疏数组</span>
+                      <a href="/2020/06/29/thebadkids/">
+                        <span class="hidden-mobile">隐秘的角落让我印象深刻的镜头</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -400,7 +421,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "隐秘的角落让我印象深刻的镜头&nbsp;",
+        "合并两个有序数组&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
