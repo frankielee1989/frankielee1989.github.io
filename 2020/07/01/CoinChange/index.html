@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>斐波那契数列 - Frankie&#39;s Blog</title>
+  <title>零钱兑换 - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-01 11:27">
-      2020年7月1日 上午
+    <time datetime="2020-07-01 15:29">
+      2020年7月1日 下午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      616 字
+      628 字
     </span>
   
 
@@ -204,76 +204,44 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p><strong>题目描述：</strong></p>
-<p>写一个函数，输入 <code>n</code> ，求斐波那契（Fibonacci）数列的第 <code>n</code> 项。斐波那契数列的定义如下：</p>
-<pre><code class="hljs angelscript">F(<span class="hljs-number">0</span>) = <span class="hljs-number">0</span>,   F(<span class="hljs-number">1</span>) = <span class="hljs-number">1</span>
-F(N) = F(N - <span class="hljs-number">1</span>) + F(N - <span class="hljs-number">2</span>), 其中 N &gt; <span class="hljs-number">1.</span></code></pre>
-
-<p>斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。</p>
-<p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p>
+              <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="hljs angelscript">输入：n = <span class="hljs-number">2</span>
-输出：<span class="hljs-number">1</span>
+<pre><code class="hljs angelscript">输入: coins = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>], amount = <span class="hljs-number">11</span>
+输出: <span class="hljs-number">3</span> 
+解释: <span class="hljs-number">11</span> = <span class="hljs-number">5</span> + <span class="hljs-number">5</span> + <span class="hljs-number">1</span>
 
-输入：n = <span class="hljs-number">5</span>
-输出：<span class="hljs-number">5</span></code></pre>
+输入: coins = [<span class="hljs-number">2</span>], amount = <span class="hljs-number">3</span>
+输出: <span class="hljs-number">-1</span></code></pre>
 
-<p><strong>提示：</strong> 0 &lt;= n &lt;= 100</p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a><strong>解题思路：</strong></h2><p><strong>动态规划：</strong></p>
+<p><strong>说明：</strong></p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>这道题如果用贪心，得到的不一定是最优解，用回溯，会超时，考虑用动态规划<br>动态规划的核心思想是。。把Question划归成Subquestion，再把Subquestion划归成Subsubquestion。。直到可以求解</p>
+<p>对于这道题，以coins = [1, 2, 5], amount = 11为例<br>我们要求组成11的最少硬币数，可以考虑组合中的最后一个硬币分别是1，2，5的情况，比如</p>
 <ul>
-<li><strong>原理：</strong> 以斐波那契数列性质 f(n+1) = f(n) + f(n−1) 为转移方程。</li>
-<li>从计算效率、空间复杂度上看，动态规划是本题的最佳解法。</li>
+<li>最后一个硬币是1的话，最少硬币数应该为【组成10的最少硬币数】+ 1枚（1块硬币）</li>
+<li>最后一个硬币是2的话，最少硬币数应该为【组成9的最少硬币数】+ 1枚（2块硬币）</li>
+<li>最后一个硬币是5的话，最少硬币数应该为【组成6的最少硬币数】+ 1枚（5块硬币）</li>
 </ul>
-<p><strong>动态规划解析：</strong></p>
+<p>在这3种情况中硬币数最少的那个就是结果<br>按同样的道理，我们也可以分别再求出组成10的最少硬币数，组成9的最少硬币数，组成6的最少硬币数。。。<br>发现了吗，这种当前状态的问题可以转化成之前状态问题的，一般就是动态规划的套路<br>所以我们自底向上依次求组成1，2…一直到11的最少硬币数<br>对每一个数，依次比较最后一个硬币是不同面额的情况，从中选出最小值</p>
+<p>⚠️注意：这里有两个小技巧：</p>
 <ul>
-<li><strong>状态定义：</strong> 设 dp 为一维数组，其中 dp[i] 的值代表斐波那契数列第 i 个数字 </li>
-<li><strong>转移方程：</strong> dp[i+1] = dp[i] + dp[i−1]，即对应数列定义 f(n+1) = f(n) + f(n−1)；</li>
-<li><strong>初始状态：</strong> dp[0]=0，dp[1]=1，即初始化前两个数字；</li>
-<li><strong>返回值：</strong> dp[n] ，即斐波那契数列的第 n 个数字。</li>
+<li>预设一个0位方便后续计算，组成0的最少硬币数是0，所以dp[0] = 0</li>
+<li>给每一个数预设一个最小值amount+1，因为硬币面额最小为整数1，所以只要有解，最小硬币数必然小于amount+1</li>
 </ul>
-<p><strong>空间复杂度优化：</strong>若新建长度为 n 的 dp 列表，则空间复杂度为 O(N)。</p>
-<ul>
-<li>由于 dp 列表第 i 项只与第 i−1 和第 i−2 项有关，因此只需要初始化三个整形变量 <code>sum</code>, <code>a</code>, <code>b</code> ，利用辅助变量 sum 使 a,b 两数字交替前进即可 （具体实现见代码）。</li>
-<li>节省了 dp 列表空间，因此空间复杂度降至 O(1)。</li>
-</ul>
-<p><strong>循环求余法：</strong></p>
-<p>​    <strong>大数越界：</strong> 随着 n 增大, f(n) 会超过 <code>Int32</code> 甚至 <code>Int64</code> 的取值范围，导致最终的返回值错误。</p>
-<ul>
-<li><strong>求余运算规则：</strong> 设正整数 x , y , p ，求余符号为 % ，则有 ( x + y ) % p = ( x % p + y % p ) % p。</li>
-<li><strong>解析：</strong> 根据以上规则，可推出 f(n) % p = [f(n−1) % p + f(n−2) % p] % p ，从而可以在循环过程中每次计算 sum=(a+b)⊙1000000007，此操作与最终返回前取余等价。</li>
-</ul>
-<p><strong>复杂度分析：</strong></p>
-<ul>
-<li>时间复杂度 O(N)： 计算 f(n) 需循环 n 次，每轮循环内计算操作使用 O(1) 。</li>
-<li>空间复杂度 O(1)： 几个标志变量使用常数大小的额外空间。</li>
-</ul>
-<p><strong>图解：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe6w9pooj314k0mugls.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe7583axj314k0muq3k.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe7cbjqhj314k0mu74w.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe7igta5j314k0muaao.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe7ox1acj314k0mujs1.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe7vwm1kj314k0muwf4.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe82d3xcj314k0mut9c.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe890edgj314k0muwew.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe8f6y3wj314k0mudhl.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe8ksyvej314k0muwfa.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe8qwjf3j314k0mut9i.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggbe8wtqyoj314k0mut9k.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><strong>代码：</strong></p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">1</span>, sum;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)&#123;
-            sum = (a + b) % <span class="hljs-number">1000000007</span>;
-            a = b;
-            b = sum;
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">coinChange</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] coins, <span class="hljs-keyword">int</span> amount)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[amount+<span class="hljs-number">1</span>];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;amount+<span class="hljs-number">1</span>; i++) &#123;
+            dp[i] = i == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : amount+<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> coin : coins) &#123;
+                <span class="hljs-keyword">if</span>(i &gt;= coin) &#123;
+                    dp[i] = Math.min(dp[i-coin] + <span class="hljs-number">1</span>, dp[i]);
+                &#125;
+            &#125;
         &#125;
-        <span class="hljs-keyword">return</span> a;
+        <span class="hljs-keyword">return</span> dp[amount] == amount+<span class="hljs-number">1</span> ? -<span class="hljs-number">1</span> : dp[amount];
     &#125;
 &#125;</code></pre>
-
-
 
 
             </article>
@@ -292,7 +260,7 @@ F(N) = F(N - <span class="hljs-number">1</span>) + F(N - <span class="hljs-numbe
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
                     
                   </div>
                 
@@ -305,18 +273,12 @@ F(N) = F(N - <span class="hljs-number">1</span>) + F(N - <span class="hljs-numbe
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/01/CoinChange/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">零钱兑换</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/01/arrayandlinkedlist/">
-                        <span class="hidden-mobile">数组和链表的优缺点</span>
+                      <a href="/2020/07/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/">
+                        <span class="hidden-mobile">斐波那契数列</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -455,7 +417,7 @@ F(N) = F(N - <span class="hljs-number">1</span>) + F(N - <span class="hljs-numbe
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "斐波那契数列&nbsp;",
+        "零钱兑换&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
