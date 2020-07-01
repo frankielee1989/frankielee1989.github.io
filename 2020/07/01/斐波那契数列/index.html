@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      624 字
+      616 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      7
        分钟
     </span>
   
@@ -221,13 +221,13 @@ F(N) = F(N - <span class="hljs-number">1</span>) + F(N - <span class="hljs-numbe
 <p><strong>提示：</strong> 0 &lt;= n &lt;= 100</p>
 <h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a><strong>解题思路：</strong></h2><p><strong>动态规划：</strong></p>
 <ul>
-<li><strong>原理：</strong> 以斐波那契数列性质 f(n+1)=f(n)+f(n−1) 为转移方程。</li>
+<li><strong>原理：</strong> 以斐波那契数列性质 f(n+1) = f(n) + f(n−1) 为转移方程。</li>
 <li>从计算效率、空间复杂度上看，动态规划是本题的最佳解法。</li>
 </ul>
 <p><strong>动态规划解析：</strong></p>
 <ul>
 <li><strong>状态定义：</strong> 设 dp 为一维数组，其中 dp[i] 的值代表斐波那契数列第 i 个数字 </li>
-<li><strong>转移方程：</strong> dp[i+1] = dp[i] + dp[i−1]，即对应数列定义 f(n+1)=f(n)+f(n−1)<em>f</em>(<em>n</em>+1)=<em>f</em>(<em>n</em>)+<em>f</em>(<em>n</em>−1) ；</li>
+<li><strong>转移方程：</strong> dp[i+1] = dp[i] + dp[i−1]，即对应数列定义 f(n+1) = f(n) + f(n−1)；</li>
 <li><strong>初始状态：</strong> dp[0]=0，dp[1]=1，即初始化前两个数字；</li>
 <li><strong>返回值：</strong> dp[n] ，即斐波那契数列的第 n 个数字。</li>
 </ul>
