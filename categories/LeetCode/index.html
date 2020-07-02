@@ -160,12 +160,18 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 10 篇文章</p>
+  <p class="h4">共计 11 篇文章</p>
   <hr>
   
     
       
       <p class="h5">2020</p>
+    
+    <a href="/2020/07/02/MissingNumber/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">剑指 Offer 53 - II. 0～n-1中缺失的数字</span>
+      <span style="float: right;">07-02</span>
+    </a>
+  
     
     <a href="/2020/07/02/height-checker/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">1051.高度检查器</span>
@@ -220,13 +226,19 @@
       <span style="float: right;">06-28</span>
     </a>
   
-    
-    <a href="/2020/06/28/twosum/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">两数之和</span>
-      <span style="float: right;">06-28</span>
-    </a>
-  
 </div>
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/categories/LeetCode/page/2/">2</a><a class="extend next" rel="next" href="/categories/LeetCode/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 

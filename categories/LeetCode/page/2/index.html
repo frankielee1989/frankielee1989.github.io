@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>标签 - 数组 - Frankie&#39;s Blog</title>
+  <title>分类 - LeetCode - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -42,7 +42,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -160,42 +160,12 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 6 篇文章</p>
+  <p class="h4">共计 11 篇文章</p>
   <hr>
   
     
       
       <p class="h5">2020</p>
-    
-    <a href="/2020/07/02/MissingNumber/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">剑指 Offer 53 - II. 0～n-1中缺失的数字</span>
-      <span style="float: right;">07-02</span>
-    </a>
-  
-    
-    <a href="/2020/07/02/height-checker/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">1051.高度检查器</span>
-      <span style="float: right;">07-02</span>
-    </a>
-  
-    
-    <a href="/2020/07/01/arrayandlinkedlist/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">数组和链表的优缺点</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
-    
-    <a href="/2020/06/30/merge-sorted-array/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">合并两个有序数组</span>
-      <span style="float: right;">06-30</span>
-    </a>
-  
-    
-    <a href="/2020/06/29/SparseArray/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">稀疏数组</span>
-      <span style="float: right;">06-29</span>
-    </a>
-  
     
     <a href="/2020/06/28/twosum/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">两数之和</span>
@@ -203,6 +173,18 @@
     </a>
   
 </div>
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/categories/LeetCode/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/categories/LeetCode/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -295,7 +277,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签 - 数组&nbsp;",
+        "分类 - LeetCode&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
