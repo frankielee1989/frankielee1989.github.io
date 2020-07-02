@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>26.删除排序数组中的重复项</title>
+    <link href="/2020/07/02/RemoveDuplicates/"/>
+    <url>/2020/07/02/RemoveDuplicates/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p><p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p><p><strong>示例1：</strong></p><pre><code class="hljs angelscript">给定数组 nums = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], 函数应该返回新的长度 <span class="hljs-number">2</span>, 并且原数组 nums 的前两个元素被修改为 <span class="hljs-number">1</span>, <span class="hljs-number">2</span>。 你不需要考虑数组中超出新长度后面的元素。</code></pre><p><strong>示例2：</strong></p><pre><code class="hljs angelscript">给定 nums = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],函数应该返回新的长度 <span class="hljs-number">5</span>, 并且原数组 nums 的前五个元素被修改为 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>。你不需要考虑数组中超出新长度后面的元素。</code></pre><p><strong>说明：</strong></p><p>为什么返回数值是整数，但输出的答案是数组呢?</p><p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p><p>你可以想象内部操作如下:</p><pre><code class="hljs go"><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span><span class="hljs-keyword">int</span> <span class="hljs-built_in">len</span> = removeDuplicates(nums);<span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span><span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>; i++) &#123;    <span class="hljs-built_in">print</span>(nums[i]);&#125;</code></pre><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>首先注意数组是有序的，那么重复的元素一定会相邻。</p><p>要求删除重复元素，实际上就是将不重复的元素移到数组的左侧。</p><p>考虑用 2 个指针，一个在前记作 <code>p</code>，一个在后记作 <code>q</code>，算法流程如下：</p><p>比较 <code>p</code> 和 <code>q</code> 位置的元素是否相等</p><ul><li>如果相等，<code>q</code> 后移 1 位</li><li>如果不相等，将 <code>q</code> 位置的元素复制到 <code>p+1</code> 位置上，<code>p</code> 后移一位，<code>q</code> 后移 1 位<br>重复上述过程，直到 <code>q</code> 等于数组长度。</li><li>返回 <code>p + 1</code>，即为新数组长度。</li></ul><p><strong>图解：</strong></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcq4gsyepj30fk0rb0tj.jpg" srcset="/img/loading.gif" alt="1.png"></p><p><strong>优化：</strong></p><p>这是大部分题解都没有提出的，在这里提一下。</p><p>考虑如下数组：</p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcq52x2cgj3098054743.jpg" srcset="/img/loading.gif" alt="2.png"></p><p>此时数组中没有重复元素，按照上面的方法，每次比较时 nums[p] 都不等于 nums[q]，因此就会将 q 指向的元素原地复制一遍，这个操作其实是不必要的。</p><p>因此我们可以添加一个小判断，当 q - p &gt; 1 时，才进行复制。</p><p><strong>复杂度分析：</strong></p><p>时间复杂度：O(n) 。<br>空间复杂度：O(1) 。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;    <span class="hljs-keyword">if</span>(nums == <span class="hljs-keyword">null</span> || nums.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;    <span class="hljs-keyword">int</span> q = <span class="hljs-number">1</span>;    <span class="hljs-keyword">while</span>(q &lt; nums.length)&#123;        <span class="hljs-keyword">if</span>(nums[p] != nums[q])&#123;            <span class="hljs-keyword">if</span>(q - p &gt; <span class="hljs-number">1</span>)&#123;                nums[p + <span class="hljs-number">1</span>] = nums[q];            &#125;            p++;        &#125;        q++;    &#125;    <span class="hljs-keyword">return</span> p + <span class="hljs-number">1</span>;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数组</tag>
+      
+      <tag>双指针</tag>
+      
+      <tag>简单</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>剑指 Offer 53 - II. 0～n-1中缺失的数字</title>
     <link href="/2020/07/02/MissingNumber/"/>
     <url>/2020/07/02/MissingNumber/</url>

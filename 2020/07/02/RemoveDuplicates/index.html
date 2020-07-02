@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>剑指 Offer 53 - II. 0～n-1中缺失的数字 - Frankie&#39;s Blog</title>
+  <title>26.删除排序数组中的重复项 - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,7 +152,7 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-02 14:53">
+    <time datetime="2020-07-02 16:44">
       2020年7月2日 下午
     </time>
   </div>
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      470 字
+      719 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      8
        分钟
     </span>
   
@@ -204,62 +204,72 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。</p>
+              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
 <p><strong>示例1：</strong></p>
-<pre><code class="hljs angelscript">输入: [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>]
-输出: <span class="hljs-number">2</span></code></pre>
+<pre><code class="hljs angelscript">给定数组 nums = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], 
+
+函数应该返回新的长度 <span class="hljs-number">2</span>, 并且原数组 nums 的前两个元素被修改为 <span class="hljs-number">1</span>, <span class="hljs-number">2</span>。 
+
+你不需要考虑数组中超出新长度后面的元素。</code></pre>
 
 <p><strong>示例2：</strong></p>
-<pre><code class="hljs angelscript">输入: [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>]
-输出: <span class="hljs-number">8</span></code></pre>
+<pre><code class="hljs angelscript">给定 nums = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],
 
-<p><strong>限制：</strong></p>
-<p>1 &lt;= 数组长度 &lt;= 10000</p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ul>
-<li><p>排序数组中的搜索问题，首先想到 <strong>二分法</strong> 解决。</p>
-</li>
-<li><p>根据题意，数组可以按照以下规则划分为两部分。</p>
+函数应该返回新的长度 <span class="hljs-number">5</span>, 并且原数组 nums 的前五个元素被修改为 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>。
+
+你不需要考虑数组中超出新长度后面的元素。</code></pre>
+
+
+
+<p><strong>说明：</strong></p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<pre><code class="hljs go"><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span>
+<span class="hljs-keyword">int</span> <span class="hljs-built_in">len</span> = removeDuplicates(nums);
+
+<span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span>
+<span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>; i++) &#123;
+    <span class="hljs-built_in">print</span>(nums[i]);
+&#125;</code></pre>
+
+
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>首先注意数组是有序的，那么重复的元素一定会相邻。</p>
+<p>要求删除重复元素，实际上就是将不重复的元素移到数组的左侧。</p>
+<p>考虑用 2 个指针，一个在前记作 <code>p</code>，一个在后记作 <code>q</code>，算法流程如下：</p>
+<p>比较 <code>p</code> 和 <code>q</code> 位置的元素是否相等</p>
 <ul>
-<li><strong>左子数组：</strong> nums[i]=i ；</li>
-<li><strong>右子数组：</strong> nums[i]≠i ；</li>
+<li>如果相等，<code>q</code> 后移 1 位</li>
+<li>如果不相等，将 <code>q</code> 位置的元素复制到 <code>p+1</code> 位置上，<code>p</code> 后移一位，<code>q</code> 后移 1 位<br>重复上述过程，直到 <code>q</code> 等于数组长度。</li>
+<li>返回 <code>p + 1</code>，即为新数组长度。</li>
 </ul>
-</li>
-<li><p>缺失的数字等于 <strong>“右子数组的首位元素”</strong> 对应的索引；因此考虑使用二分法查找 “右子数组的首位元素” 。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcmvran5fj30q30jlgmi.jpg" srcset="/img/loading.gif" alt="Picture1.png"></p>
-</li>
-</ul>
-<p><strong>算法解析：</strong></p>
-<ol>
-<li><strong>初始化：</strong> 左边界 i=0 ，右边界 j=len(nums)−1 ；代表闭区间 [i,j] 。</li>
-<li><strong>循环二分：</strong> 当 i ≤ j 时循环（即当闭区间 [i, j] 为空时跳出）；<ul>
-<li>计算中点 m=(i+j)//2 ，其中 “//“ 为向下取整除法；</li>
-<li>若 nums[m]=m ，则 “右子数组的首位元素” 一定在闭区间 [m+1,j] 中，因此执行 i=m+1 ；</li>
-<li>若 nums[m]≠m ，则 “左子数组的末位元素” 一定在闭区间 [i,m−1] 中，因此执行 j=m−1 ；</li>
-</ul>
-</li>
-<li><strong>返回值：</strong> 跳出时，变量 i 和 j 分别指向 “右子数组的首位元素” 和 “左子数组的末位元素” 。因此返回 i 即可。</li>
-</ol>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcn000zfnj30uk0kbaa3.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcn06jpkrj30uk0kbq32.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcn0d27wwj30uk0kbq32.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcn0j5n1xj30uk0kbq32.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcn0orftdj30uk0kbq32.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcn0unikaj30uk0kbwem.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>图解：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcq4gsyepj30fk0rb0tj.jpg" srcset="/img/loading.gif" alt="1.png"></p>
+<p><strong>优化：</strong></p>
+<p>这是大部分题解都没有提出的，在这里提一下。</p>
+<p>考虑如下数组：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggcq52x2cgj3098054743.jpg" srcset="/img/loading.gif" alt="2.png"></p>
+<p>此时数组中没有重复元素，按照上面的方法，每次比较时 nums[p] 都不等于 nums[q]，因此就会将 q 指向的元素原地复制一遍，这个操作其实是不必要的。</p>
+<p>因此我们可以添加一个小判断，当 q - p &gt; 1 时，才进行复制。</p>
 <p><strong>复杂度分析：</strong></p>
-<ul>
-<li>时间复杂度 O(logN) ：二分法为对数级别复杂度。</li>
-<li>空间复杂度 O(1) ：几个变量使用常数大小的额外空间。</li>
-</ul>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">missingNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = nums.length - <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">while</span>(i &lt;= j) &#123;
-            <span class="hljs-keyword">int</span> m = (i + j) / <span class="hljs-number">2</span>;
-            <span class="hljs-keyword">if</span>(nums[m] == m) i = m + <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">else</span> j = m - <span class="hljs-number">1</span>;
+<p>时间复杂度：O(n) 。<br>空间复杂度：O(1) 。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+    <span class="hljs-keyword">if</span>(nums == <span class="hljs-keyword">null</span> || nums.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> q = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(q &lt; nums.length)&#123;
+        <span class="hljs-keyword">if</span>(nums[p] != nums[q])&#123;
+            <span class="hljs-keyword">if</span>(q - p &gt; <span class="hljs-number">1</span>)&#123;
+                nums[p + <span class="hljs-number">1</span>] = nums[q];
+            &#125;
+            p++;
         &#125;
-        <span class="hljs-keyword">return</span> i;
+        q++;
     &#125;
+    <span class="hljs-keyword">return</span> p + <span class="hljs-number">1</span>;
 &#125;</code></pre>
 
 
@@ -281,9 +291,9 @@
                     
                       <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%AE%80%E5%8D%95/">简单</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a>
+                      <a class="hover-with-bg" href="/tags/%E7%AE%80%E5%8D%95/">简单</a>
                     
                   </div>
                 
@@ -296,18 +306,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/02/RemoveDuplicates/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">26.删除排序数组中的重复项</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/02/height-checker/">
-                        <span class="hidden-mobile">1051.高度检查器</span>
+                      <a href="/2020/07/02/MissingNumber/">
+                        <span class="hidden-mobile">剑指 Offer 53 - II. 0～n-1中缺失的数字</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -446,7 +450,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "剑指 Offer 53 - II. 0～n-1中缺失的数字&nbsp;",
+        "26.删除排序数组中的重复项&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
