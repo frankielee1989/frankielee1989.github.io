@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>35.搜索插入位置 - Frankie&#39;s Blog</title>
+  <title>27.移除元素 - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-03 09:38">
-      2020年7月3日 上午
+    <time datetime="2020-07-03 14:55">
+      2020年7月3日 下午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      401 字
+      539 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      6
        分钟
     </span>
   
@@ -204,55 +204,46 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-<p>你可以假设数组中无重复元素。</p>
+              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
 <p><strong>示例1：</strong></p>
-<pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">5</span>
-输出: <span class="hljs-number">2</span></code></pre>
+<pre><code class="hljs angelscript">给定 nums = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], val = <span class="hljs-number">3</span>,
+函数应该返回新的长度 <span class="hljs-number">2</span>, 并且 nums 中的前两个元素均为 <span class="hljs-number">2</span>。
+你不需要考虑数组中超出新长度后面的元素。</code></pre>
 
 <p><strong>示例2：</strong></p>
-<pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">2</span>
-输出: <span class="hljs-number">1</span></code></pre>
+<pre><code class="hljs angelscript">给定 nums = [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>], val = <span class="hljs-number">2</span>,
+函数应该返回新的长度 <span class="hljs-number">5</span>, 并且 nums 中的前五个元素为 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>。
+注意这五个元素可为任意顺序。
+你不需要考虑数组中超出新长度后面的元素。</code></pre>
 
-<p><strong>示例3：</strong></p>
-<pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">7</span>
-输出: <span class="hljs-number">4</span></code></pre>
+<p><strong>说明：</strong></p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<pre><code class="hljs go"><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span>
+<span class="hljs-keyword">int</span> <span class="hljs-built_in">len</span> = removeElement(nums, val);
 
-<p><strong>示例4：</strong></p>
-<pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">0</span>
-输出: <span class="hljs-number">0</span></code></pre>
+<span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span>
+<span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>; i++) &#123;
+    <span class="hljs-built_in">print</span>(nums[i]);
+&#125;</code></pre>
 
-
-
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
-<li>标签：二分查找</li>
-<li>如果该题目暴力解决的话需要 O(n) 的时间复杂度，但是如果二分的话则可以降低到 O(logn) 的时间复杂度</li>
-<li>整体思路和普通的二分查找几乎没有区别，先设定左侧下标 <code>left</code> 和右侧下标 <code>right</code>，再计算中间下标 <code>mid</code></li>
-<li>每次根据 nums[mid] 和 target 之间的大小进行判断，相等则直接返回下标，nums[mid] &lt; target 则 left 右移，nums[mid] &gt; target 则 right 左移</li>
-<li>查找结束如果没有相等值则返回 left，该值为插入位置</li>
-<li>时间复杂度：O(logn)</li>
-</ul>
-<p>二分查找的思路不难理解，但是边界条件容易出错，比如 循环结束条件中 left 和 right 的关系，更新 left 和 right 位置时要不要加 1 减 1。</p>
-<p><strong>图解：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjfny037j30k00k03z7.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjfytx44j30k00k0gm9.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjg4uvlnj30k00k00tc.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjgaggckj30k00k0gm9.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjgg63l1j30k00k0t9g.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这道题说白了就是保留nums中不等于val的元素。注意保留两个字，我们直接用一个变量来记录需要保留的元素下标，然后再用一个变量来遍历原数组，这就是所谓的双指针。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdtai5s6dj30hb09jgln.jpg" srcset="/img/loading.gif" alt="image.png"></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">searchInsert</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = nums.length - <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">while</span>(left &lt;= right) &#123;
-            <span class="hljs-keyword">int</span> mid = (left + right) / <span class="hljs-number">2</span>;
-            <span class="hljs-keyword">if</span>(nums[mid] == target) &#123;
-                <span class="hljs-keyword">return</span> mid;
-            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[mid] &lt; target) &#123;
-                left = mid + <span class="hljs-number">1</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeElement</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> val)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (j &lt; nums.length) &#123;
+            <span class="hljs-keyword">if</span> (nums[j] != val) &#123;
+                nums[i++] = nums[j++]; <span class="hljs-comment">// nums[j] != val，这个元素需要保留</span>
             &#125; <span class="hljs-keyword">else</span> &#123;
-                right = mid - <span class="hljs-number">1</span>;
+                j++;  <span class="hljs-comment">// nums[j] == val，不用保留，直接忽略，往后遍历</span>
             &#125;
         &#125;
-        <span class="hljs-keyword">return</span> left;
+        <span class="hljs-keyword">return</span> i;
     &#125;
 &#125;</code></pre>
 
@@ -275,9 +266,9 @@
                     
                       <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%AE%80%E5%8D%95/">简单</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a>
+                      <a class="hover-with-bg" href="/tags/%E7%AE%80%E5%8D%95/">简单</a>
                     
                   </div>
                 
@@ -290,18 +281,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/03/remove-element/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">27.移除元素</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/02/RemoveDuplicates/">
-                        <span class="hidden-mobile">26.删除排序数组中的重复项</span>
+                      <a href="/2020/07/03/search-insert-position/">
+                        <span class="hidden-mobile">35.搜索插入位置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -440,7 +425,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "35.搜索插入位置&nbsp;",
+        "27.移除元素&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
