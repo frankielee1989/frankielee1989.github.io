@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>53.最大子序和</title>
+    <link href="/2020/07/03/maximum-subarray/"/>
+    <url>/2020/07/03/maximum-subarray/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p><p><strong>示例：</strong></p><pre><code class="hljs angelscript">输入: [<span class="hljs-number">-2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-5</span>,<span class="hljs-number">4</span>],输出: <span class="hljs-number">6</span>解释: 连续子数组 [<span class="hljs-number">4</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>] 的和最大，为 <span class="hljs-number">6</span>。</code></pre><p><strong>进阶：</strong></p><pre><code class="hljs reasonml">如果你已经实现复杂度为 <span class="hljs-constructor">O(<span class="hljs-params">n</span>)</span> 的解法，尝试使用更为精妙的分治法求解。</code></pre><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这道题太难了，看答案都不理解 o(╥﹏╥)o</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数组</tag>
+      
+      <tag>动态规划</tag>
+      
+      <tag>简单</tag>
+      
+      <tag>分治算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>35.搜索插入位置</title>
     <link href="/2020/07/03/search-insert-position/"/>
     <url>/2020/07/03/search-insert-position/</url>
