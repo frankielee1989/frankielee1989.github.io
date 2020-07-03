@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>35.搜索插入位置</title>
+    <link href="/2020/07/03/search-insert-position/"/>
+    <url>/2020/07/03/search-insert-position/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p><p>你可以假设数组中无重复元素。</p><p><strong>示例1：</strong></p><pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">5</span>输出: <span class="hljs-number">2</span></code></pre><p><strong>示例2：</strong></p><pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">2</span>输出: <span class="hljs-number">1</span></code></pre><p><strong>示例3：</strong></p><pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">7</span>输出: <span class="hljs-number">4</span></code></pre><p><strong>示例4：</strong></p><pre><code class="hljs angelscript">输入: [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">0</span>输出: <span class="hljs-number">0</span></code></pre><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul><li>标签：二分查找</li><li>如果该题目暴力解决的话需要 O(n) 的时间复杂度，但是如果二分的话则可以降低到 O(logn) 的时间复杂度</li><li>整体思路和普通的二分查找几乎没有区别，先设定左侧下标 <code>left</code> 和右侧下标 <code>right</code>，再计算中间下标 <code>mid</code></li><li>每次根据 nums[mid] 和 target 之间的大小进行判断，相等则直接返回下标，nums[mid] &lt; target 则 left 右移，nums[mid] &gt; target 则 right 左移</li><li>查找结束如果没有相等值则返回 left，该值为插入位置</li><li>时间复杂度：O(logn)</li></ul><p>二分查找的思路不难理解，但是边界条件容易出错，比如 循环结束条件中 left 和 right 的关系，更新 left 和 right 位置时要不要加 1 减 1。</p><p><strong>图解：</strong></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjfny037j30k00k03z7.jpg" srcset="/img/loading.gif" alt="img"></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjfytx44j30k00k0gm9.jpg" srcset="/img/loading.gif" alt="img"></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjg4uvlnj30k00k00tc.jpg" srcset="/img/loading.gif" alt="img"></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjgaggckj30k00k0gm9.jpg" srcset="/img/loading.gif" alt="img"></p><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggdjgg63l1j30k00k0t9g.jpg" srcset="/img/loading.gif" alt="img"></p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">searchInsert</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = nums.length - <span class="hljs-number">1</span>;        <span class="hljs-keyword">while</span>(left &lt;= right) &#123;            <span class="hljs-keyword">int</span> mid = (left + right) / <span class="hljs-number">2</span>;            <span class="hljs-keyword">if</span>(nums[mid] == target) &#123;                <span class="hljs-keyword">return</span> mid;            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[mid] &lt; target) &#123;                left = mid + <span class="hljs-number">1</span>;            &#125; <span class="hljs-keyword">else</span> &#123;                right = mid - <span class="hljs-number">1</span>;            &#125;        &#125;        <span class="hljs-keyword">return</span> left;    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数组</tag>
+      
+      <tag>简单</tag>
+      
+      <tag>二分查找</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>26.删除排序数组中的重复项</title>
     <link href="/2020/07/02/RemoveDuplicates/"/>
     <url>/2020/07/02/RemoveDuplicates/</url>
