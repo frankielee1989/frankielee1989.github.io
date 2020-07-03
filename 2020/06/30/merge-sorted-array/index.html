@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>合并两个有序数组 - Frankie&#39;s Blog</title>
+  <title>88.合并两个有序数组 - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      401 字
+      403 字
     </span>
   
 
@@ -204,8 +204,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p><strong>题目描述：</strong></p>
-<p>给你两个有序整数数组 nums1 和 nums2 ，请你将 nums2 合并到 nums1 中<em>，</em>使 nums1 成为一个有序数组。</p>
+              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你两个有序整数数组 nums1 和 nums2 ，请你将 nums2 合并到 nums1 中<em>，</em>使 nums1 成为一个有序数组。</p>
 <p><strong>说明：</strong></p>
 <ul>
 <li>初始化 nums1 和 nums2 的元素数量分别为 m 和 n。</li>
@@ -218,8 +217,7 @@ nums2 = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<
 
 输出: [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]</code></pre>
 
-<p><strong>解题思路：</strong></p>
-<ul>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
 <li>标签：从后向前数组遍历</li>
 <li>因为 <code>nums1</code> 的空间都集中在后面，所以从后向前处理排序的数据会更好，节省空间，一边遍历一边将值填充进去</li>
 <li>设置指针 len1 和 len2 分别指向 nums1 和 nums2 的有数字尾部，从尾部值开始比较遍历，同时设置指针 len 指向 nums1 的最末尾，每次遍历比较值大小之后，则进行填充</li>
@@ -231,7 +229,7 @@ nums2 = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae4017rlj30zk0ivdgn.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae496f97j30zk0ivmxy.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggae4h2iy0j30zk0ivmy0.jpg" srcset="/img/loading.gif" alt="img"></p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums1, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span>[] nums2, <span class="hljs-keyword">int</span> n)</span> </span>&#123;
         <span class="hljs-keyword">int</span> len1 = m - <span class="hljs-number">1</span>;
         <span class="hljs-keyword">int</span> len2 = n - <span class="hljs-number">1</span>;
@@ -427,7 +425,7 @@ nums2 = [<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "合并两个有序数组&nbsp;",
+        "88.合并两个有序数组&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
