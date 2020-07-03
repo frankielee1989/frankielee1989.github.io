@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      539 字
+      536 字
     </span>
   
 
@@ -238,10 +238,9 @@
         <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;
         <span class="hljs-keyword">while</span> (j &lt; nums.length) &#123;
             <span class="hljs-keyword">if</span> (nums[j] != val) &#123;
-                nums[i++] = nums[j++]; <span class="hljs-comment">// nums[j] != val，这个元素需要保留</span>
-            &#125; <span class="hljs-keyword">else</span> &#123;
-                j++;  <span class="hljs-comment">// nums[j] == val，不用保留，直接忽略，往后遍历</span>
-            &#125;
+                nums[i++] = nums[j]; <span class="hljs-comment">// nums[j] != val，这个元素需要保留</span>
+            &#125; 
+          	j++;  <span class="hljs-comment">// nums[j] == val，不用保留，直接忽略，往后遍历</span>
         &#125;
         <span class="hljs-keyword">return</span> i;
     &#125;
