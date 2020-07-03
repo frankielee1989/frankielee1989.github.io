@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="李航航">
   <meta name="keywords" content="">
-  <title>两数之和 - Frankie&#39;s Blog</title>
+  <title>1. 两数之和 - Frankie&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      339 字
+      341 字
     </span>
   
 
@@ -204,8 +204,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p><strong>题目描述：</strong><br>    给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。<br>    你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br><strong>示例：</strong><br>    给定 nums = [2, 7, 11, 15], target = 9<br>    因为 nums[0] + nums[1] = 2 + 7 = 9<br>    所以返回 [0, 1]<br><strong>解题思路：</strong></p>
-<ul>
+              <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>​    给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。<br>​    你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br><strong>示例：</strong><br>​    给定 nums = [2, 7, 11, 15], target = 9<br>​    因为 nums[0] + nums[1] = 2 + 7 = 9<br>​    所以返回 [0, 1]</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ul>
 <li><p>标签：哈希映射</p>
 </li>
 <li><p>这道题本身如果通过暴力遍历的话也是很容易解决的，时间复杂度在 O(n2)</p>
@@ -226,7 +226,7 @@
 <p>  <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg87n0zbh3j30yo0k2q4a.jpg" srcset="/img/loading.gif" alt="2"></p>
 <p>  <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg87n55x68j30yo0k2abf.jpg" srcset="/img/loading.gif" alt="3"></p>
 <p>  <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg87nd6l3bj30yo0k2tab.jpg" srcset="/img/loading.gif" alt="4"></p>
-<pre><code class="hljs Java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs Java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] twoSum(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target) &#123;
         Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
         <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt; nums.length; i++) &#123;
@@ -416,7 +416,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "两数之和&nbsp;",
+        "1. 两数之和&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
